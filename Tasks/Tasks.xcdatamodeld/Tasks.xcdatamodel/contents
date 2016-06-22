@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="9525" systemVersion="15D21" minimumToolsVersion="Automatic">
+    <entity name="Location" representedClassName=".Location" syncable="YES">
+        <attribute name="name" attributeType="String" syncable="YES"/>
+        <relationship name="tasks" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Task" inverseName="location" inverseEntity="Task" syncable="YES"/>
+    </entity>
+    <entity name="Task" representedClassName=".Task">
+        <attribute name="dueDate" attributeType="Date">
+            <userInfo/>
+        </attribute>
+        <attribute name="isOverdue" optional="YES" transient="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
+        <attribute name="priority" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="text" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="location" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Location" inverseName="tasks" inverseEntity="Location" syncable="YES"/>
+        <fetchedProperty name="highPriTasks" optional="YES" syncable="YES">
+            <fetchRequest name="fetchedPropertyFetchRequest" entity="Task" predicateString="priority == 3"/>
+        </fetchedProperty>
+        <userInfo/>
+    </entity>
+    <fetchRequest name="tasksDueSooner" entity="Task" predicateString="dueDate &lt; $DUE_DATE"/>
+    <elements>
+        <element name="Location" positionX="583" positionY="459" width="128" height="73"/>
+        <element name="Task" positionX="313" positionY="260" width="128" height="149"/>
+    </elements>
+</model>
